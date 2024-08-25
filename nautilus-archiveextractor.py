@@ -12,7 +12,7 @@ extention_2_command = {
     ".tar": "tar xvf",
     ".tbz2": "tar xvjf",
     ".tgz": "tar xvzf",
-    ".lzma": "unlzma",
+    ".lzma": "xz -kd",
     ".rar": "unrar vbx",
     ".zip": "unzip",
     ".z": "uncompress",
