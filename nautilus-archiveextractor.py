@@ -43,10 +43,17 @@ class ArchiveExtacterMenuProvider(GObject.GObject, Nautilus.MenuProvider):
         return None
 
     def extract(self, shit, command, file):
+
+        _, fullpath = shlex.quote(file.get_uri()).split("://", maxsplit=1)
+        _, parent = shlex.quote(file.get_parent_uri()).split("://", maxsplit=1)
+
         os.system(
-            f"nohup {command} {shlex.quote(file.get_name())}; " # >/dev/null 2>&1; "
-            "RESULT=$?; "
-            "ICON=$([ $RESULT -gt 0 ] && echo 'dialog-error' || echo 'dialog-information'); "
-            "MESSAGE=$([ $RESULT -gt 0 ] && echo 'ERROR' || echo 'EXTRACTED'); "
-            f"notify-send -i $ICON $MESSAGE -a extractor '{file.get_name()}'"
+            f"nohup sh -c '"
+                f"cd {parent} && "
+                f"{command} {fullpath}; "
+                "RESULT=$?; "
+                "ICON=$([ $RESULT -gt 0 ] && echo 'dialog-error' || echo 'dialog-information'); "
+                "MESSAGE=$([ $RESULT -gt 0 ] && echo 'ERROR' || echo 'EXTRACTED'); "
+                f"notify-send -i $ICON $MESSAGE -a extractor '{file.get_name()}'"
+            "' >/dev/null 2>&1 &"
         )
