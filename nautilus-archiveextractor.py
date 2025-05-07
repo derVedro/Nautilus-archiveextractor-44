@@ -2,16 +2,16 @@ from gi.repository import Nautilus, GObject
 import os, shlex
 
 extention_2_command = {
-    ".tar.bz2": "tar xvjf",
-    ".tar.gz": "tar xvzf",
-    ".tar.xz": "tar xvf",
-    ".tar.zst": "tar axvf",
+    ".tar.bz2": "tar xjf",
+    ".tar.gz": "tar xzf",
+    ".tar.xz": "tar xf",
+    ".tar.zst": "tar axf",
     ".xz": "xz -kd",
     ".bz2": "bunzip2",
     ".gz": "gunzip",
-    ".tar": "tar xvf",
-    ".tbz2": "tar xvjf",
-    ".tgz": "tar xvzf",
+    ".tar": "tar xf",
+    ".tbz2": "tar xjf",
+    ".tgz": "tar xzf",
     ".lzma": "xz -kd",
     ".rar": "unrar x",
     ".zip": "unzip",
